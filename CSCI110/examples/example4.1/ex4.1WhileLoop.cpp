@@ -11,28 +11,13 @@ int main() {
     cout << "Please enter the number of iterations ";
     cin >> num;
 
-    do
+    while (i < num)
     {
         cout << "I = " << i << endl;
         ++count;
         total = total + i;
         ++i;
-    } while (i < num);
-    
-    // for (int i = 0; i < num; i++)
-    // {
-    //     cout << "I = " << i << endl;
-    //     ++count;
-    //     total = total + i;
-    // }
-
-    // while (i < num)
-    //     {
-    //         cout << "I = " << i << endl;
-    //         ++count;
-    //         total = total + i;
-    //         ++i;
-    //     }
+    }
 
     cout << "Total = " << total << endl;
     avg = total / count;
