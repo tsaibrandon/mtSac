@@ -4,7 +4,7 @@ Prolog
     b. Author: Brandon Tsai
     c. Date/Time: 01/16/2025
     d. Input Variables: f_name, l_name, first_variable, second_variable
-    e. Process Flow: Enter first then last name, then 2 numbers.
+    e. Process Flow: Enter the f_name then l_name, then first_variable and second_variable. Then the program adds, subtracts, multiplies, and divides the first_variable by the second_variable. Then it will check to see if the first_variable is larger or smaller than the second_variable and print out a message.
     f. Output Variables: full_name, sum, diff, prod, quot
 */
 
