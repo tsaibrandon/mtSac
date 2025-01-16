@@ -4,7 +4,7 @@ Prolog
     b. Author: Brandon Tsai
     c. Date/Time: 01/16/2025
     d. Input Variables: advertising_cost, marketing_salaries, sales_commissions, new_customers
-    e. Process Flow: Enter the advertising_cost, marketing_salaries, sales_commissions, new_customers. 
+    e. Process Flow: Enter the advertising_cost, marketing_salaries, sales_commissions, new_customers. Then the program calculates the acquisition cost by adding the advertising_cost, marketing_salaries, and sales_commissions, and then divides it by new_customers.
     f. Output Variables: acquisition_cost
 */
 
