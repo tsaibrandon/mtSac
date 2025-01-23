@@ -1,3 +1,13 @@
+/*
+Prolog
+    a. Program Description: The program determines the user's tax liability based on their marital status and their income.
+    b. Author: Brandon Tsai
+    c. Date/Time: 01/23/2025
+    d. Input Variables: marital_status, income, answer
+    e. Process Flow: The program starts by asking the user for their marital status then for their income. Then based on the marital_status and their income the program will determine how much tax RATE is needed to calculate their total_tax. Then the program asks if the user wants to continue and if "y" then the program loops.
+    f. Output Variables: total_tax
+*/
+
 #include <iostream>
 #include <string>
 
@@ -47,7 +57,7 @@ int main() {
 
         cout << "The tax is $" << total_tax << endl;
 
-        cout << "\n" << "Would you like to continue? (y/n)" << "\n";
+        cout << "\n" << "Would you like to continue? (y/n) ";
         cin >> answer;
 
         cout << "\n";
