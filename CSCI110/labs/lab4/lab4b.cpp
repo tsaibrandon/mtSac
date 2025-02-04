@@ -44,8 +44,8 @@ void row_print(int arr1[], int arr2[], double arr3[], double arr4[], int max_siz
 int main() {
     signal(SIGWINCH, handle_winch);
 
-    const int MAX_SIZE = 7;
-    int emp_id[MAX_SIZE] = {56588, 45201, 78951, 87775, 84512, 13028, 75804};
+    const int MAX_SIZE = 100;
+    int emp_id[MAX_SIZE]; //56588 45201 78951 87775 84512 13028 75804
     int hours[MAX_SIZE]; //45 35 55 62 42 51 53 
     double pay_rate[MAX_SIZE]; //25.5 22.5 24.5 27.5 31.5 32.5 28.5 
     double wages[MAX_SIZE];
@@ -53,7 +53,10 @@ int main() {
 
     cout << fixed << setprecision(2);
 
-    //get inputs for hours and payrate
+    //get inputs emp id, hours, and payrate
+    cout << "Enter all of the employee IDs (seperated by spaces): ";
+    int_input(emp_id, MAX_SIZE, size);
+    size = 0;
     cout << "Enter all the employee hours (seperated by spaces): ";
     int_input(hours, MAX_SIZE, size);
     size = 0;
