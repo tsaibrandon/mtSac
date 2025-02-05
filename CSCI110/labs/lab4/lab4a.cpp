@@ -14,15 +14,17 @@ int main() {
         //ask for the speed limit and driver's speed
         cout << "\nWhat is the speed limit (mph)? ";
         cin >> speed_limit;
-        cout << "How fast (mph) were you going? ";
-        cin >> driver_speed;
-
-        //validate the input
+        
+        //validate speed limit input
         if (speed_limit < 20 || speed_limit > 70) {
             cout << "You have entered an invalid speed limit. Try Again.\n";
             continue;
         }
 
+        cout << "How fast (mph) were you going? ";
+        cin >> driver_speed;
+
+        //validate driver speed input
         if (driver_speed <= speed_limit) {
             cout << "You were not speeding.\n";
             continue;
