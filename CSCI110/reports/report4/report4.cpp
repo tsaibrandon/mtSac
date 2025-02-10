@@ -1,3 +1,13 @@
+/*
+Prolog
+    a. Program Description: The program prints out a table showing the amount of medals won by each country and the grand total of all the medals.
+    b. Author: Brandon Tsai
+    c. Date/Time: 02/06/2025
+    d. Input Variables: 
+    e. Process Flow: Run the program and print out a table using countries[], counts[], and grand_total.
+    f. Output Variables: countries, counts, grand_total
+*/
+
 #include <iostream>
 #include <iomanip>
 
@@ -5,20 +15,20 @@ using namespace std;
 
 //calculate row totals
 const int COLUMNS = 3;
-int row_total(int counts[][COLUMNS], int row) {
+int row_total(int arr[][COLUMNS], int row) {
     int total = 0;
     for (int j = 0; j < COLUMNS; j++) {
-        total += counts[row][j];
+        total += arr[row][j];
     }
 
     return total;
 }
 
 //calculate column totals
-int column_total(int counts[][3], int num_rows, int column) {
+int column_total(int arr[][COLUMNS], int num_rows, int column) {
     int total = 0;
     for (int i = 0; i < num_rows; i++) {
-        total += counts[i][column];
+        total += arr[i][column];
     }
 
     return total;
