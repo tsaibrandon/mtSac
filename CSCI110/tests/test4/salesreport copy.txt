@@ -1,0 +1,15 @@
+Salesperson ID               Sale Amount
+========================================
+100                                    $10000
+100                                    $12000
+100                                    $5000
+Total sales for this salesperson:      $27000
+101                                    $14000
+101                                    $18000
+101                                    $12500
+Total sales for this salesperson:      $44500
+102                                    $13500
+102                                    $14500
+102                                    $20000
+Total sales for this salesperson:      $48000
+Total of all sales:                    $119500
