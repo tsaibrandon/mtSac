@@ -1,3 +1,13 @@
+/*
+Prolog
+    a. Program Description:  Speeding Violation Calculation. This program takes in the user's inputs and determines if they were speeding or not.
+    b. Author: Brandon Tsai
+    c. Date/Time: 02/06/2025
+    d. Input Variables: speed_limit, driver_speed
+    e. Process Flow: The program asks the user to input a speed_limit, then it will validate the input and if it invalid it will ask you for the speed_limit again. If the input was valid then the code will ask for the driver_speed and then check if the user was speeding or not. If the user was not speeding then the program will restart and ask for the speed_limit again. If the user was speeding then the program would print out how much over the speed_limit they were going.
+    f. Output Variables: speeding
+*/
+
 #include <iostream>
 
 using namespace std;

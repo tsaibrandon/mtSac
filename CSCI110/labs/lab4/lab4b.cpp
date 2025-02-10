@@ -1,3 +1,13 @@
+/*
+Prolog
+    a. Program Description: Payroll. This program relates data that is entered by the user and using array subscripts. 
+    b. Author: Brandon Tsai
+    c. Date/Time: 02/06/2025
+    d. Input Variables: emp_id, hours, pay_rate
+    e. Process Flow: The program asks the user input all the emp_id and hours and stores it in the emp_id and hours array using the int_input. then it asks the user to input the pay_rate and stores it into the pay_rate array using the double_input. Then using the values in those arrays the program will use wage_calc to calculate the individual wages for each employee and then it will print out a table with the information.
+    f. Output Variables: emp_id, hours, pay_rate, wages
+*/
+
 #include <iostream>
 #include <iomanip>
 
@@ -28,15 +38,15 @@ void double_input(double arr[], int max_size, int& size) {
 }
 
 //wage calculation
-void wage_calc (int arr1[], double arr2[], double arr3[], int max_size) {    
-    for (int i = 0; i < max_size; i++) {
+void wage_calc (int arr1[], double arr2[], double arr3[], int size) {    
+    for (int i = 0; i < size; i++) {
         arr3[i] = arr1[i] * arr2[i];
     }
 }
 
 //print out the rows
-void row_print(int arr1[], int arr2[], double arr3[], double arr4[], int max_size) {
-    for(int i = 0; i < max_size; i++) {
+void row_print(int arr1[], int arr2[], double arr3[], double arr4[], int size) {
+    for(int i = 0; i < size; i++) {
         cout << left << setw(12) << arr1[i] << setw(10) << arr2[i] << "$"  << setw(12) << arr3[i] << "$"  << setw(12) << arr4[i] << endl;
     }
 }
@@ -64,12 +74,12 @@ int main() {
     double_input(pay_rate, MAX_SIZE, size);
 
     //calculate employee wages
-    wage_calc(hours, pay_rate, wages, MAX_SIZE);
+    wage_calc(hours, pay_rate, wages, size);
 
     //print out table
     cout << left << setw(13) << "\nEmp ID" << setw(10) << "Hours" << setw(13) << "Pay Rates" << setw(12) << "Wages" << endl;
     cout << "--------------------------------------------\n";
-    row_print(emp_id, hours, pay_rate, wages, MAX_SIZE);
+    row_print(emp_id, hours, pay_rate, wages, size);
     
     return 0;
 }
