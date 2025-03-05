@@ -9,6 +9,7 @@ public class Main {
         // char c = 'A';
 
         long a = 10;
+        //long a;
         long b = 20; 
         // long c = max(a, b);
         int c = (int)max(a,b);
