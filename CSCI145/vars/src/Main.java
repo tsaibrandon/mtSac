@@ -10,7 +10,20 @@ public class Main {
 
         long a = 10;
         long b = 20; 
-        long c = max(a, b);
+        // long c = max(a, b);
+        int c = (int)max(a,b);
+        float pi = 3.14159f; //you cant try to put a larger value into a smaller one so we need to force the thing
+
+        a += b; // a = a + b
+
+        //shift operator
+        b <<= 2;
+
+        a = b = c;
+
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(a + " " + b + " " + c);
     }
 
     //using the turnary operator
