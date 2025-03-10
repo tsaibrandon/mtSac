@@ -1,16 +1,20 @@
 public class Main {
     public static void main(String[] args) {
         Integer i = 10;
-        Integer j = 20;
-        String s = "%f %f%n";
+        Integer j = 0x7fffffff;
 
-        Pair p = new Pair(i, j);
+        System.out.println(j++);
+        System.out.println(j);
 
-        System.out.println(p);
+        // String s = "%f %f%n";
 
-        p.swap();
+        // Pair p = new Pair(i, j);
 
-        System.out.printf(String.format(s, (double) i, (double) j));
+        // System.out.println(p);
+
+        // p.swap();
+
+        // System.out.printf(String.format(s, (double) i, (double) j));
     }
 
     public static void swap(int a, int b) {
