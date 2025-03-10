@@ -2,6 +2,7 @@ public class Main {
     public static void main(String[] args) {
         Integer i = 10;
         Integer j = 20;
+        String s = "%f %f%n";
 
         Pair p = new Pair(i, j);
 
@@ -9,7 +10,7 @@ public class Main {
 
         p.swap();
 
-        System.out.println(p);
+        System.out.printf(String.format(s, (double) i, (double) j));
     }
 
     public static void swap(int a, int b) {
@@ -23,5 +24,11 @@ public class Main {
         k.b = tmp;
     }
 
+    public static boolean isEven(int a) {
+        return(a & 1) == 0;
+    }
 
+    public static boolean isOdd(int a) {
+        return !isEven(a);
+    }
 }
