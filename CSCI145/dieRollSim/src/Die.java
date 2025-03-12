@@ -19,12 +19,17 @@ public class Die {
         rnd = new Random();
     }
     
-    public Die(int face) {
-        this(face, 6);
+    public Die(int totalFaces) {
+        this(0, totalFaces);
+        rollDie();
+    }
+
+    public Die() {
+        this(6);
     }
 
     public int getFace() {
-        return face;
+        return face + 1;
     }
 
     public int getTotalFaces() {
@@ -33,6 +38,10 @@ public class Die {
 
     public void rollDie() {
         face = rnd.nextInt(totalFaces);
+    }
+
+    public String toString() {
+        return "Face: " + (face + 1);  
     }
 
     private boolean isValidFace(int face, int totalFaces) {
