@@ -39,11 +39,11 @@ public class Stack {
     private void resize() {
         int[] tmpStore = new int[store.length * SCALING_FACTOR];
 
-        for (int i = 0; i < store.length; ++i) {
+        for (int i = 0; i < store.length; i++) {
             tmpStore[i] = store[i];
-
-            store = tmpStore;
         }
+
+        store = tmpStore;
     }
 
 }

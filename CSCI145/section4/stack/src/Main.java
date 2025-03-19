@@ -1,18 +1,18 @@
 public class Main {
 
     public static void main(String[] args) {
-        Stack s = new Stack();
+        Queue queue = new Queue();
 
         for (int i = 1; i <= 16; i++) {
             System.out.print(i + " ");
-            s.push(i);
+            queue.enqueue(i);
         }
 
         System.out.println();
 
-        while(!s.empty()) {
-            System.out.print(s.peek() + " ");
-            s.pop();
+        while(!queue.empty()) {
+            System.out.print(queue.peek() + " ");
+            queue.dequeue();
         }
 
         System.out.println();
