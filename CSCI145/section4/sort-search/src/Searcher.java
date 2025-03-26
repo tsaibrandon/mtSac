@@ -30,7 +30,7 @@ public class Searcher {
 
         if (array == null) return -1;
 
-        return binarySearch(array, i:0, array.length - 1, term);
+        return binarySearch(array, 0, array.length - 1, term);
     }
 
     private static int binarySearch(int[] array, int i, int j, int term) {
