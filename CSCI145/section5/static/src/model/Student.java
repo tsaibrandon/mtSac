@@ -10,7 +10,7 @@ public class Student {
     public Student(String name) {
 
         this(name, 0);
-        this.name = name;
+ 
     }
 
     public Student(String name, double gpa) {
