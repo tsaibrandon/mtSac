@@ -26,5 +26,9 @@ public class Main {
          * if player enters radiation or vent room game ends
          * 
          */
+
+         Game game = new Game();
+
+         
     }
 }
