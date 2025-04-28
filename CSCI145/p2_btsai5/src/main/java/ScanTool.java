@@ -1,92 +1,82 @@
 public class ScanTool {
-    private static final int ROWS = 8;
-    private static final int COLS = 8;
-    
-    private Player player;
     private Board board;
     private BoardState boardState;
+    private Player player;
 
-    public ScanTool(Player player, Board board, BoardState boardState) {
-        this.player = player;
+    public ScanTool(Board board, BoardState boardState, Player player) {
         this.board = board;
         this.boardState = boardState;
+        this.player = player;
     }
 
     public void scanRooms() {
-        // Clear current room's detections first
-        boardState.clearDetections(player.getRow(), player.getColumn());
-        
-        scanTop();
-        scanRight();
-        scanBottom();
-        scanLeft();
+        int row = player.getRow();
+        int col = player.getColumn();
+        String result = "";
+
+        if (board.getBoard()[row][col] == RoomType.WEAPON) {
+            result += "W";
+        }
+
+        if (scanTop(row, col)) {
+            result += "R";
+        }
+        if (scanRight(row, col)) {
+            if (!result.contains("R")) {
+                result += "R";
+            }
+        }
+        if (scanBottom(row, col)) {
+            if (!result.contains("R")) {
+                result += "R";
+            }
+        }
+        if (scanLeft(row, col)) {
+            if (!result.contains("R")) {
+                result += "R";
+            }
+        }
+
+        while (result.length() < 3) {
+            result += " ";
+        }
+
+        boardState.updateScanResults(row, col, result);
+    }
+    
+    private boolean scanTop(int row, int col) {
+        if (isValidRoom(row - 1, col)) {
+            RoomType room = board.getBoard()[row - 1][col];
+            return room == RoomType.RADIATION || room == RoomType.VENT;
+        }
+        return false;
+    }
+
+    private boolean scanRight(int row, int col) {
+        if (isValidRoom(row, col + 1)) {
+            RoomType room = board.getBoard()[row][col + 1];
+            return room == RoomType.RADIATION || room == RoomType.VENT;
+        }
+        return false;
+    }
+
+    private boolean scanBottom(int row, int col) {
+        if (isValidRoom(row + 1, col)) {
+            RoomType room = board.getBoard()[row + 1][col];
+            return room == RoomType.RADIATION || room == RoomType.VENT;
+        }
+        return false;
+    }
+
+    private boolean scanLeft(int row, int col) {
+        if (isValidRoom(row, col - 1)) {
+            RoomType room = board.getBoard()[row][col - 1];
+            return room == RoomType.RADIATION || room == RoomType.VENT;
+        }
+        return false;
     }
 
     private boolean isValidRoom(int row, int col) {
-        return row >= 0 && row < ROWS && col >= 0 && col < COLS;
-    }
-    
-    private void scanTop() {
-        int row = player.getRow() - 1;
-        int col = player.getColumn();
-        
-        if (isValidRoom(row, col)) {
-            RoomType roomType = board.getBoard()[row][col];
-            if (roomType == RoomType.RADIATION) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.R);
-            } else if (roomType == RoomType.VENT) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.V);
-            } else if (roomType == RoomType.WEAPON) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.W);
-            }
-        }
-    }
-
-    private void scanRight() {
-        int row = player.getRow();
-        int col = player.getColumn() + 1;
-        
-        if (isValidRoom(row, col)) {
-            RoomType roomType = board.getBoard()[row][col];
-            if (roomType == RoomType.RADIATION) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.R);
-            } else if (roomType == RoomType.VENT) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.V);
-            } else if (roomType == RoomType.WEAPON) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.W);
-            }
-        }
-    }
-
-    private void scanBottom() {
-        int row = player.getRow() + 1;
-        int col = player.getColumn();
-        
-        if (isValidRoom(row, col)) {
-            RoomType roomType = board.getBoard()[row][col];
-            if (roomType == RoomType.RADIATION) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.R);
-            } else if (roomType == RoomType.VENT) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.V);
-            } else if (roomType == RoomType.WEAPON) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.W);
-            }
-        }
-    }
-
-    private void scanLeft() {
-        int row = player.getRow();
-        int col = player.getColumn() - 1;
-        
-        if (isValidRoom(row, col)) {
-            RoomType roomType = board.getBoard()[row][col];
-            if (roomType == RoomType.RADIATION) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.R);
-            } else if (roomType == RoomType.VENT) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.V);
-            } else if (roomType == RoomType.WEAPON) {
-                boardState.addDetection(player.getRow(), player.getColumn(), ScanDetect.W);
-            }
-        }
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
     }
 }

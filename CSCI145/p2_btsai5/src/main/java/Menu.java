@@ -1,68 +1,70 @@
 public class Menu {
-    private static final int ROWS = 8;
-    private static final int COLS = 8;
-
     public void printInstructions() {
-        System.out.println("Welcome to the Space Station Mission!");
-        System.out.println("\nInstructions:");
-        System.out.println("- Use R, L, U, D to move Right, Left, Up, Down");
-        System.out.println("- Use P to pick up the weapon when you find it");
-        System.out.println("- Avoid rooms with Radiation (R) or Vacuum (V)");
-        System.out.println("- Find the weapon (W) and return to start (0,0)");
-        System.out.println("- Your position is marked with 'O'");
-        System.out.println("\nGood luck, operator!\n");
+        System.out.println("\nEnder Outpost Attack Simulator");
+        System.out.println("Avoid at all cost the radiation and vaccuum of space.");
+        System.out.println("Locate the dreaded PMS weapon and return to Centurion Station with it.");
     }
 
-    public void printBoard(RoomType[][] board, BoardState boardState, Player player) {
-        System.out.println("\nCurrent Board State:");
-        System.out.println("   0  1  2  3  4  5  6  7");
-        
-        for (int i = 0; i < ROWS; i++) {
-            System.out.print(i + " ");
-            for (int j = 0; j < COLS; j++) {
-                System.out.print("[");
-                
-                // Print detected hazards from BoardState
-                ScanDetect[] detections = boardState.getDetections(i, j);
-                if (detections != null) {
-                    for (ScanDetect detection : detections) {
-                        if (detection != null) {
-                            System.out.print(detection.toString());
-                        }
-                    }
-                }
-                
-                // Print player icon if present
-                if (i == player.getRow() && j == player.getColumn()) {
-                    System.out.print("O");
-                } else {
-                    System.out.print(" ");
-                }
-                
-                System.out.print("]");
+    public void printBoard(BoardState boardState, Player player) {
+        System.out.println("\n  0   1   2   3   4   5   6   7");
+        for (int i = 0; i < 8; i++) {
+            System.out.print(" ");
+            for (int j = 0; j < 8; j++) {
+                System.out.print("+---");
             }
-            System.out.println();
+            System.out.println("+");
+            
+            System.out.print(i);
+            for (int j = 0; j < 8; j++) {
+                System.out.print("|");
+                String scanResults = boardState.getScanResults(i, j);
+                System.out.print(scanResults);
+            }
+            System.out.println("|");
+            
+            System.out.print(" ");
+            for (int j = 0; j < 8; j++) {
+                System.out.print("|");
+                if (player.getRow() == i && player.getColumn() == j) {
+                    System.out.print(" " + player.getIcon() + " ");
+                } else {
+                    System.out.print("   ");
+                }
+            }
+            System.out.println("|");
         }
         
-        System.out.println("\nStatus: " + player.getStatus());
-        System.out.println("Bag: " + player.getBag());
+        System.out.print(" ");
+        for (int j = 0; j < 8; j++) {
+            System.out.print("+---");
+        }
+        System.out.println("+");
     }
 
-    public void printGameOver(boolean success) {
-        if (success) {
-            System.out.println("\nCongratulations! Mission Successful!");
-            System.out.println("You retrieved the weapon and made it back safely!");
+    public void printGameOver(boolean isWin) {
+        if (isWin) {
+            System.out.println("\nCongratulations! Mission Accomplished!");
+            System.out.println("You successfully retrieved the weapon and escaped!");
         } else {
             System.out.println("\nGame Over! Mission Failed!");
-            System.out.println("Better luck next time, operator.");
+            System.out.println("Your operator did not survive...");
         }
+    }
+
+    public void printInvalidMove() {
+        System.out.println("\nInvalid move! Please stay within the grid boundaries.\n");
+    }
+
+    public void printInvalidPickup() {
+        System.out.println("\nThere is no weapon to pick up in this room!\n");
     }
 
     public void printPrompt() {
-        System.out.print("\nEnter move (R/L/U/D/P): ");
+        System.out.println("\nEnter your move ");
+        System.out.print("(R)ight, (L)eft, (U)p, (D)own, (P)ick up weapon: ");
     }
 
-    public void printError(String message) {
-        System.out.println("\nError: " + message);
+    public void printPlayAgain() {
+        System.out.print("\nWould you like to play again? (Y/N): ");
     }
 }

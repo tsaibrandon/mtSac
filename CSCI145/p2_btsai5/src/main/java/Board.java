@@ -98,6 +98,8 @@ public class Board {
             return true;
         }else if(array[0] == 1 && array[1] == 0) {
             return true;
+        }else if(array[0] == 0 && array[1] == 0) {
+            return true;
         }else {
             return false;
         }

@@ -53,7 +53,6 @@ public class Player {
         this.column = column;
     }
 
-    // Helper method to update position
     public void updatePosition(int newRow, int newColumn) {
         this.row = newRow;
         this.column = newColumn;
