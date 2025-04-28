@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run JUnit Tests",
+            "request": "launch",
+            "mainClass": "",
+            "projectName": "p2_btsai5",
+            "vmArgs": "-ea",
+            "console": "internalConsole"
+        }
+    ]
+} 

@@ -1,6 +1,8 @@
 public class Game {
     Board board = new Board();
+    BoardState boardState = new BoardState();
     Player player = new Player();
+    ScanTool tool = new ScanTool();
     Menu menu = new Menu();
 
     private Scanner scan = new Scanner(System.in);

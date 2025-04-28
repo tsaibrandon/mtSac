@@ -5,8 +5,30 @@ public class Board {
     
     private RoomType[] rooms = new RoomType[64];
     private RoomType[][] board = new RoomType[ROWS][COLS];
+    
 
     public void createRooms() {
+        initializeRooms();
+        placeRadiation();
+        placeVent();
+        placeWeapon();
+    }
+    
+    public RoomType[] getRooms() {
+        return rooms;
+    }
+
+    public void createBoard() {
+        for (int i = 0; i < rooms.length; i++) {
+            board[i / COLS][i % COLS] = rooms[i];
+        }
+    }
+
+    public RoomType[][] getBoard() {
+        return board;
+    }
+
+    private void initializeRooms() {
         for (int i = 0; i < rooms.length; i++) {
             rooms[i] = RoomType.EMPTY;
         }
@@ -18,7 +40,7 @@ public class Board {
 
         while(true) {
             if(radiationRooms < 12) {
-                if(rooms[roomIndex] == RoomType.EMPTY && !isAdjacentToStart(conversion2D(roomIndex))) {
+                if(isValidRoom(roomIndex)) {
                     rooms[roomIndex] = RoomType.RADIATION;
                     radiationRooms++;
                 }
@@ -35,7 +57,7 @@ public class Board {
         
         while (true) {
             if(ventRoom < 1) {
-                if(rooms[roomIndex] == RoomType.EMPTY && !isAdjacentToStart(conversion2D(roomIndex))) {
+                if(isValidRoom(roomIndex)) {
                     rooms[roomIndex] = RoomType.VENT;
                     ventRoom++;
                 }
@@ -52,7 +74,7 @@ public class Board {
 
         while(true) {
             if(weaponRoom < 1) {
-                if(rooms[roomIndex] == RoomType.EMPTY && !isAdjacentToStart(conversion2D(roomIndex))) {
+                if(isValidRoom(roomIndex)) {
                     rooms[roomIndex] = RoomType.WEAPON;
                     weaponRoom++;
                 }
@@ -60,12 +82,6 @@ public class Board {
             }else {
                 break;
             }
-        }
-    }
-
-    private void createBoard() {
-        for (int i = 0; i < rooms.length; i++) {
-            board[i / COLS][i % COLS] = rooms[i];
         }
     }
 
@@ -95,12 +111,5 @@ public class Board {
         
         return coordinates;
     }
-
-    
-
-    public void updateBoard() {}
-
-
-    
 
 }
