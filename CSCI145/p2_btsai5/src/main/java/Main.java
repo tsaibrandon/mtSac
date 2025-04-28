@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -27,8 +29,19 @@ public class Main {
          * 
          */
 
-         Game game = new Game();
-
-         
+        Scanner scanner = new Scanner(System.in);
+        boolean playAgain = true;
+        
+        while (playAgain) {
+            Game game = new Game();
+            game.startGame();
+            
+            System.out.print("\nWould you like to play again? (Y/N): ");
+            String response = scanner.nextLine().toUpperCase();
+            playAgain = response.equals("Y");
+        }
+        
+        scanner.close();
+        System.out.println("\nThanks for playing! Goodbye!");
     }
 }
