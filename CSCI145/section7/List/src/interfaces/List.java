@@ -1,13 +1,16 @@
 package interfaces;
 
-public interface List<T extends Comparable<T>> {
+import exception.InvalidArgumentException;
+import interfaces.Cloneable;
 
-    /** Retruns the item at position i
+public interface List<T extends Comparable<T> & Cloneable<T>> {
+
+    /** Retruns the item at position i, i is zero indexed.
      * @param int: index of the item to be returned
      */
     T get(int idx);
 
-    /** Sets the item at position i to item x.
+    /** Sets the item at position i to item x, i is zero indexed.
      * @param int: index at which to update an item
      * @param T: int item with which to update
      */
@@ -18,21 +21,21 @@ public interface List<T extends Comparable<T>> {
      */
     void add(T item);
 
-    /** Removes the item at position i, shifiting subsequent items.
+    /** Removes the item at position i, shifiting subsequent items, i is zero indexed.
      * @param int: index at which to remove an item
      */
     void remove(int idx); 
 
-    /** Inserts item x at position i, shifiting subsequent items.
+    /**  Removes the first occurence of item x.
+     * @param T: the item to be removed
+     */
+    void remove(T item) throws InvalidArgumentException;
+
+    /** Inserts item x at position i, shifiting subsequent items, i is zero indexed.
      * @param int: the index at which to insert the item
      * @param T: the item to insert
      */
     void insert(int idx, T item);
-   
-    /**  Removes the first occurence of item x.
-     * @param T: the item to be removed
-     */
-    void remove(T item);
 
     /** Returns the number of items in the list.
      * @return item count

@@ -1,8 +1,12 @@
 package model;
 
+import java.security.InvalidKeyException;
+
+import exception.InvalidArgumentException;
+import interfaces.Cloneable;
 import interfaces.List;
 
-public class LinkedList<T extends Comparable<T>> implements List<T>{
+public class LinkedList<T extends Comparable<T> & Cloneable<T>> implements List<T>{
 
     private int count;
     private Node head;
@@ -15,24 +19,26 @@ public class LinkedList<T extends Comparable<T>> implements List<T>{
 
     @Override
     public T get(int idx) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        if(!isValidIdx(idx)) throw new IndexOutOfBoundsException();
+
+        return nodeAt(idx).getItem();
     }
 
     @Override
     public void set(int idx, T item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+        if(!isValidIdx(idx)) { throw new IndexOutOfBoundsException(); }
+        
+        nodeAt(idx).setItem(item);
     }
 
     @Override
     public void add(T item) {
-        Node newNode = new Node(item, tail, null);
+        Node<T> newNode = new Node<T>(item, tail, null);
 
         if(isEmpty()) {
             head = tail = newNode;
         }else {
-            tail.next = newNode;
+            tail.setNext(newNode);
             tail = newNode;
         }
 
@@ -41,21 +47,35 @@ public class LinkedList<T extends Comparable<T>> implements List<T>{
 
     @Override
     public void remove(int idx) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        if(isValidIdx(idx)) throw new IndexOutOfBoundsException();
+
+        Node<T> delNode = nodeAt(idx);
+
+        deleteNode(delNode);
     }
 
+    @Override
+    public void remove(T item) throws InvalidArgumentException {
+        if(item == null) throw new InvalidArgumentException();
+
+        Node<T> delNode = nodeWith(item);
+
+        if(delNode == null) throw new InvalidArgumentException();
+
+        deleteNode(delNode);
+    }
+    
     @Override
     public void insert(int idx, T item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+        if(!isValidIdx(idx)) throw new IndexOutOfBoundsException();
+
+        Node<T> ptr = nodeAt(idx);
+
+        insertNode(ptr, new Node<T>(item));
     }
 
-    @Override
-    public void remove(T item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
-    }
+    
+    
 
     @Override
     public int size() { return count; }
@@ -65,24 +85,90 @@ public class LinkedList<T extends Comparable<T>> implements List<T>{
 
     @Override
     public int find(T item) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        return indexOf(item);
     }   
-   private class Node {
+   
+    /** assumptions:
+     * lis not empty
+     * idx is valid
+     */ 
+    private Node<T> nodeAt(int idx) {
+        Node<T> ptr = head;
 
-        private T item;
-        private Node prev;
-        private Node next;
-
-        public Node(T item, LinkedList<T>.Node prev, LinkedList<T>.Node next) {
-            this.item = item;
-            this.prev = prev;
-            this.next = next;
+        while(idx > 0) {
+            ptr = ptr.getNext();
+            --idx;
         }
 
-        public Node(T item) {
-            this(item, null, null);
-        }
+        return ptr;
     }
 
+    /** returns -1 if item is not contained */
+    private Node<T> nodeWith(T item) {
+        Node<T> ptr = head;
+
+        while(ptr != null) {
+            if(ptr.getItem().compareTo(item) == 0)
+                return ptr;
+
+            ptr = ptr.getNext();
+        }
+
+        return ptr;
+    }
+    /** reutrns -1 if the item i snot contained */
+    private int indexOf(T item) {
+        Node<T> ptr = head;
+        int idx = 0;
+
+        while(ptr != null) {
+            if(ptr.getItem().compareTo(item) == 0)
+                return idx;
+            
+            ++idx;
+
+            ptr = ptr.getNext();
+        }
+
+        return -1;
+    }
+
+    
+
+    private boolean isValidIdx(int idx) {
+        return idx >= 0 && idx < count;
+    }
+
+    /** node is not null */
+    private void deleteNode(Node<T> node) {
+        
+        if(node == head) deleteHead();
+        else if(node == tail) deleteTail();
+        else deleteInternalNode(node);
+
+        --count;
+    }
+
+    private void deleteHead() {
+        head = head.getNext();
+        head.setPrev(null);
+    }
+
+    private void deleteInternalNode(Node<T> node) {
+        Node<T> prev = node.getPrev();
+        Node<T> next = node.getNext();
+
+        prev.setNext(next);
+        next.setPrev(prev);
+    }
+
+    private void deleteTail() {
+        tail = tail.getPrev();
+        tail.setNext(null);
+    }
+
+    private void insertNode(Node<T> ptr, Node<T> node) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'insertNode'");
+    }
 }
