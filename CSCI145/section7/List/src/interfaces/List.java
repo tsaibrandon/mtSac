@@ -1,9 +1,8 @@
 package interfaces;
 
 import exception.InvalidArgumentException;
-import interfaces.Cloneable;
 
-public interface List<T extends Comparable<T> & Cloneable<T>> {
+public interface List<T extends Comparable<T>> {
 
     /** Retruns the item at position i, i is zero indexed.
      * @param int: index of the item to be returned

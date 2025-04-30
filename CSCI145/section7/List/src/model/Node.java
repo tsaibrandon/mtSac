@@ -1,9 +1,6 @@
 package model;
 
-import interfaces.Cloneable;
-import interfaces.List;
-
-public class Node <T extends Comparable<T> & Cloneable<T>> {
+public class Node <T extends Comparable<T>> {
 
     private T item;
     private Node<T> prev;
@@ -20,11 +17,11 @@ public class Node <T extends Comparable<T> & Cloneable<T>> {
     }
 
     public Object getItem() {
-        return item.copy();
+        return item;
     }
 
     public void setItem(T item) {
-        this.item = item.copy();
+        this.item = item;
     }
 
     public Node<T> getPrev() {

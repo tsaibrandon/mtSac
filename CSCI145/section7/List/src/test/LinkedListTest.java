@@ -13,8 +13,9 @@ import model.LinkedList;
 
 public class LinkedListTest {
 
-    private  MtsacInteger TEST_VALUE = new MtsacInteger(5);
-    private List<MtsacInteger> list;
+    private  Integer TEST_VALUE = 5;
+    private Integer[] testValues = {5, 10, 15};
+    private List<Integer> list;
 
     @Before
     public void setup() {
@@ -49,7 +50,65 @@ public class LinkedListTest {
     public void listDoesNotFindsAddedItemNotAdded() {
         list.add(TEST_VALUE);
 
-        assertEquals(-1, list.find(new MtsacInteger TEST_VALUE.i + 1));
+        assertEquals(-1, list.find(TEST_VALUE+ 1));
+    }
+
+    @Test
+    public void getEachItemForward() {
+        loadItems(list);
+
+        for (int i = 0; i < testValues.length; i++) {
+            assertEquals(testValues[i], list.get(i));
+        }
+    }
+
+    @Test
+    public void getEachItemReverse() {
+        loadItems(list);
+
+        for (int i = testValues.length - 1; i >= 0; i++) {
+            assertEquals(testValues[i], list.get(i));
+        }
+    }
+
+    @Test
+    public void testGetThrowsIndexOutOfBounds() {
+        list.add(TEST_VALUE);
+
+        try {
+            list.get(1);
+            assertTrue(false);
+        }catch(IndexOutOfBoundsException e) {
+            assertTrue(true);
+        }catch(Exception e) {
+            assertTrue(false);
+        }
+    }
+    
+    @Test
+    public void testSet() {
+        loadItems(list);
+        list.set(1, TEST_VALUE);
+        assertEquals(TEST_VALUE, list.get(1));
+    }
+
+    @Test
+    public void testSetThrowsIndexOutOfBounds() {
+        list.add(TEST_VALUE);
+
+        try {
+            list.set(1, TEST_VALUE);
+            assertTrue(false);
+        }catch(IndexOutOfBoundsException e) {
+            assertTrue(true);
+        }catch(Exception e) {
+            assertTrue(false);
+        }
+    }
+    
+    private void loadItems(List<Integer> list2) {
+        for(Integer integer : testValues)
+            list.add(integer);
     }
     
 }

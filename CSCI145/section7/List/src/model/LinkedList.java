@@ -67,15 +67,20 @@ public class LinkedList<T extends Comparable<T> & Cloneable<T>> implements List<
     
     @Override
     public void insert(int idx, T item) {
-        if(!isValidIdx(idx)) throw new IndexOutOfBoundsException();
+        if(idx == count) {
+            add(item);
+            return;
+        }
 
-        Node<T> ptr = nodeAt(idx);
+        if(!isValidIdx(idx) || idx != count) throw new IndexOutOfBoundsException();
 
-        insertNode(ptr, new Node<T>(item));
+        Node<T> newNode = new Node<T>(item);
+
+        if(count == 0) 
+            insertNodeAtFront(newNode);
+        else 
+            insertInternalNode(nodeAt(idx), newNode);
     }
-
-    
-    
 
     @Override
     public int size() { return count; }
@@ -167,8 +172,18 @@ public class LinkedList<T extends Comparable<T> & Cloneable<T>> implements List<
         tail.setNext(null);
     }
 
-    private void insertNode(Node<T> ptr, Node<T> node) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertNode'");
+    private void insertInternalNode(Node<T> ptr, Node<T> node) {
+        // ptr is in the position at which the insertion happens
+        node.setNext(ptr);
+        node.setPrev(ptr.getPrev());
+        ptr.getPrev().setNext(node);
+        ptr.setPrev(node);
+    }
+
+    private void insertNodeAtFront(Node<T> newNode) {
+        // if list is empty then the add function was called 
+        newNode.setNext(head);
+        head.setPrev(newNode);
+        head = newNode;
     }
 }
