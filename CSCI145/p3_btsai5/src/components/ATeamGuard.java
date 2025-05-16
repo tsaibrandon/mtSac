@@ -1,3 +1,5 @@
+package components;
+
 import java.util.List;
 
 public class ATeamGuard extends Guard {
@@ -38,8 +40,6 @@ public class ATeamGuard extends Guard {
             int operatorRow = operator.getRow();
             int operatorCol = operator.getCol();
             
-            System.out.println("A-Team Guard at (" + row + "," + col + ") detected operator at (" + operatorRow + "," + operatorCol + ")");
-            
             // Store the operator's current position and disable random movement
             targetRow = operatorRow;
             targetCol = operatorCol;
@@ -63,7 +63,6 @@ public class ATeamGuard extends Guard {
                 operator = findAdjacentOperator(board);
                 if (operator != null) {
                     // Operator is still nearby, update tracking to their new position
-                    System.out.println("After moving, A-Team Guard at (" + row + "," + col + ") detected operator at (" + operator.getRow() + "," + operator.getCol() + ")");
                     targetRow = operator.getRow();
                     targetCol = operator.getCol();
                     // Keep tracking enabled and random movement disabled
@@ -89,7 +88,6 @@ public class ATeamGuard extends Guard {
                     operator = findAdjacentOperator(board);
                     if (operator != null) {
                         // Operator is still nearby, update tracking to their new position
-                        System.out.println("After moving to previous position, A-Team Guard at (" + row + "," + col + ") detected operator at (" + operator.getRow() + "," + operator.getCol() + ")");
                         targetRow = operator.getRow();
                         targetCol = operator.getCol();
                         // Keep tracking enabled and random movement disabled
@@ -110,7 +108,6 @@ public class ATeamGuard extends Guard {
             // After moving randomly, immediately check adjacent rooms again
             operator = findAdjacentOperator(board);
             if (operator != null) {
-                System.out.println("After random move, A-Team Guard at (" + row + "," + col + ") detected operator at (" + operator.getRow() + "," + operator.getCol() + ")");
                 // Start tracking immediately when operator is detected
                 targetRow = operator.getRow();
                 targetCol = operator.getCol();
@@ -166,7 +163,6 @@ public class ATeamGuard extends Guard {
         int rowDiff = Math.abs(newRow - row);
         int colDiff = Math.abs(newCol - col);
         boolean isOneSpace = (rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1);
-        System.out.println("Checking one space move from (" + row + "," + col + ") to (" + newRow + "," + newCol + "): " + isOneSpace);
         return isOneSpace;
     }
 } 

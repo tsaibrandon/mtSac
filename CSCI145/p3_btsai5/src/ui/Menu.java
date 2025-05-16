@@ -1,8 +1,17 @@
+package ui;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
+
+import main.Main;
+import game.Game;
+import components.Entity;
+import components.GameConstants;
+import components.Operator;
+import components.Guard;
 
 public class Menu {
     private Scanner scanner;

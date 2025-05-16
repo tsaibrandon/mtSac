@@ -1,5 +1,15 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import components.Entity;
+import components.Operator;
+import components.Guard;
+import components.GameConstants;
+import components.FodderGuard;
+import components.RegularGuard;
+import components.ATeamGuard;
 
 public class Game {
     private List<Entity>[][] board;

@@ -1,3 +1,5 @@
+package components;
+
 public class GameConstants {
     // Board dimensions
     public static final int BOARD_SIZE = 8;

@@ -1,8 +1,10 @@
+package components;
+
 import java.util.List;
 
-public class FodderGuard extends Guard {
-    public FodderGuard(int row, int col) {
-        super(row, col, GameConstants.FODDER_MOVE_PROBABILITY, GameConstants.FODDER_SYMBOL);
+public class RegularGuard extends Guard {
+    public RegularGuard(int row, int col) {
+        super(row, col, GameConstants.REGULAR_MOVE_PROBABILITY, GameConstants.REGULAR_SYMBOL);
     }
 
     @Override
