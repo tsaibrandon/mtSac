@@ -30,26 +30,26 @@ public class Operator extends Entity {
     }
 
     public void setLittleDoctor() {
-        if (isInCenterRoom()) {
+        if(isInCenterRoom()) {
             System.out.println("\nThe little doctor has been set!");
             hasSetLittleDoctor = true;
-        } else {
+        }else {
             System.out.println("\nThere\'s not enough power in this room. Get to the center!");
         }
     }
 
     @Override
-    public void move(List<Entity>[][] board) {
-        // Movement is handled by the game logic based on user input
-    }
+    public void move(List<Entity>[][] board) {}
 
     public boolean tryMove(int newRow, int newCol, List<Entity>[][] board) {
-        if (isValidMove(newRow, newCol)) {
+        if(isValidMove(newRow, newCol)) {
             board[row][col].remove(this);
             setPosition(newRow, newCol);
             board[newRow][newCol].add(this);
+            
             return true;
         }
+        
         return false;
     }
 

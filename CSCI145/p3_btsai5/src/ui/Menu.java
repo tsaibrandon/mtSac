@@ -38,85 +38,85 @@ public class Menu {
             displayBoard();
             handleUserInput();
         }
+        
         displayBoard();
         displayGameResult();
     }
 
     private void displayBoard() {
         List<Entity>[][] board = game.getBoard();
+        
         System.out.println("\n   0     1     2     3     4     5     6     7");
         
-        for (int i = 0; i < GameConstants.BOARD_SIZE; i++) {
-            // Print top horizontal line
+        for(int i = 0; i < GameConstants.BOARD_SIZE; i++) {
             System.out.print(" ");
-            for (int j = 0; j < GameConstants.BOARD_SIZE; j++) {
+            
+            for(int j = 0; j < GameConstants.BOARD_SIZE; j++) {
                 System.out.print("+-----");
             }
+            
             System.out.println("+");
             
-            // Print row with symbols
             System.out.print(i);
-            for (int j = 0; j < GameConstants.BOARD_SIZE; j++) {
+            for(int j = 0; j < GameConstants.BOARD_SIZE; j++) {
                 System.out.print("|");
                 List<Entity> cellEntities = board[i][j];
                 
-                if (!cellEntities.isEmpty()) {
-                    // Get unique symbols for the cell
+                if(!cellEntities.isEmpty()) {
                     Set<Character> symbols = new HashSet<>();
-                    boolean hasOperator = false;
                     
-                    // Check for operator first
-                    for (Entity entity : cellEntities) {
-                        if (entity instanceof Operator) {
+                    boolean hasOperator = false;
+                    int startPos = 1; 
+                    
+                    for(Entity entity : cellEntities) {
+                        if(entity instanceof Operator) {
                             hasOperator = true;
                             symbols.add(entity.getSymbol());
+                            
                             break;
                         }
                     }
                     
-                    // Add guard symbols (one per type)
-                    for (Entity entity : cellEntities) {
-                        if (entity instanceof Guard) {
+                    for(Entity entity : cellEntities) {
+                        if(entity instanceof Guard) {
                             symbols.add(((Guard) entity).getSymbol());
                         }
                     }
                     
-                    // Format symbols to fit in cell
-                    StringBuilder cell = new StringBuilder("     ");  // 5 spaces
-                    int startPos = 1;  // Start at position 1 to leave a space at the start
+                    StringBuilder cell = new StringBuilder("     "); 
                     
-                    // Add operator symbol first if present
-                    if (hasOperator) {
+                    if(hasOperator) {
                         cell.setCharAt(startPos++, GameConstants.OPERATOR_SYMBOL);
                     }
                     
-                    // Add guard symbols
-                    for (char symbol : symbols) {
-                        if (symbol != GameConstants.OPERATOR_SYMBOL && startPos < 4) {
+                    for(char symbol : symbols) {
+                        if(symbol != GameConstants.OPERATOR_SYMBOL && startPos < 4) {
                             cell.setCharAt(startPos++, symbol);
                         }
                     }
                     
                     System.out.print(cell);
-                } else {
+                }else {
                     System.out.print("     ");
                 }
             }
             System.out.println("|");
             
-            // Print empty row
             System.out.print(" ");
+            
             for (int j = 0; j < GameConstants.BOARD_SIZE; j++) {
                 System.out.print("|     ");
             }
+            
             System.out.println("|");
         }
         
-        // Print final horizontal line
         System.out.print(" ");
-        for (int j = 0; j < GameConstants.BOARD_SIZE; j++) {
+        
+        for(int j = 0; j < GameConstants.BOARD_SIZE; j++) {
             System.out.print("+-----");
         }
+        
         System.out.println("+");
     }
 
@@ -125,26 +125,27 @@ public class Menu {
         System.out.print("(R)ight, (L)eft, (U)p, (D)own, (S)et to set the device: ");
         
         String input = scanner.nextLine().trim().toUpperCase();
-        if (input.isEmpty()) {
+        char action = input.charAt(0);
+        
+        if(input.isEmpty()) {
             return;
         }
 
-        char action = input.charAt(0);
-        if (action == 'S') {
+        if(action == 'S') {
             game.trySetLittleDoctor();
-        } else if ("RLUD".indexOf(action) >= 0) {
-            if (!game.moveOperator(action)) {
+        }else if("RLUD".indexOf(action) >= 0) {
+            if(!game.moveOperator(action)) {
                 System.out.println("\nInvalid move! Please stay within the grid boundaries.");
             }
-        } else {
+        }else {
             System.out.println("\nInvalid input! Please try again.");
         }
     }
 
     private void displayGameResult() {
-        if (game.hasWon()) {
+        if(game.hasWon()) {
             System.out.println("\nCongratulations! You've successfully set the little doctor and escaped!");
-        } else {
+        }else {
             System.out.println("\nGame Over! You were caught by a guard!");
         }
     }
