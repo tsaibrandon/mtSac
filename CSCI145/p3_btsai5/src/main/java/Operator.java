@@ -29,7 +29,10 @@ public class Operator extends Entity {
 
     public void setLittleDoctor() {
         if (isInCenterRoom()) {
+            System.out.println("\nThe little doctor has been set!");
             hasSetLittleDoctor = true;
+        } else {
+            System.out.println("\nThere\'s not enough power in this room. Get to the center!");
         }
     }
 

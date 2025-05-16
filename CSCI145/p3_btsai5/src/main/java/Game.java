@@ -96,9 +96,7 @@ public class Game {
     }
 
     public void trySetLittleDoctor() {
-        if (operator.isInCenterRoom()) {
-            operator.setLittleDoctor();
-        }
+        operator.setLittleDoctor();
     }
 
     private void moveGuards() {

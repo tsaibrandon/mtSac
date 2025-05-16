@@ -13,6 +13,10 @@ public class Menu {
     }
 
     public void start() {
+        System.out.println("\nEnder Outpost Attack Simulator");
+        System.out.println("Avoid at all costs the roving guards.");
+        System.out.println("Get to one of the four centrally located rooms and set the MD device then escape to activate it.\n");
+        
         do {
             game = new Game();
             playGame();
@@ -109,7 +113,7 @@ public class Menu {
 
     private void handleUserInput() {
         System.out.println("\nEnter your move");
-        System.out.print("(R)ight, (L)eft, (U)p, (D)own, (P)lace little doctor: ");
+        System.out.print("(R)ight, (L)eft, (U)p, (D)own, (S)et to set the device: ");
         
         String input = scanner.nextLine().trim().toUpperCase();
         if (input.isEmpty()) {
@@ -117,7 +121,7 @@ public class Menu {
         }
 
         char action = input.charAt(0);
-        if (action == 'P') {
+        if (action == 'S') {
             game.trySetLittleDoctor();
         } else if ("RLUD".indexOf(action) >= 0) {
             if (!game.moveOperator(action)) {
