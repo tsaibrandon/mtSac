@@ -15,7 +15,7 @@ public class Menu {
     public void start() {
         System.out.println("\nEnder Outpost Attack Simulator");
         System.out.println("Avoid at all costs the roving guards.");
-        System.out.println("Get to one of the four centrally located rooms and set the MD device then escape to activate it.\n");
+        System.out.println("Get to one of the four centrally located rooms and set the MD device then escape to activate it.");
         
         do {
             game = new Game();
